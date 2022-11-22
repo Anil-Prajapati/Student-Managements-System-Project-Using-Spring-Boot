@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<!-- THIS IS THE CDN CSS OF THE BOOTSTRAPT THAT ARE THE GO ON THE GOOGLE AND COPY AND PAST -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-2">
+		<h1>Employee List</h1>
+		<!-- THIS IS THE LINK OF ADD EMPLOYEE AND SHOW OBJECT -->
+		<a th:href="@{/showNewEmployeeForm}"
+			class="btn btn-primary btn-sm md-3">Add Employee</a>
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<!--  THIS ARE THE COLUMN OF TABLE ACCORDING TO YOU HAVE A DECLERED -->
+				<tr>
+					<th>Employee First Name</th>
+					<th>Employee Last Name</th>
+					<th>Employee Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- THAT ARE THE GET THE NAME OF THE EMPLOYEE TABLE VALUE -->
+				<tr th:each="employee :${listEmployees}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.lastName}"></td>
+					<td th:text="${employee.email}"></td>
+					<!-- THAT ARE THE LINKE OF THE UPDATE AND DELETE METHOD -->
+					<td><a
+						th:href="@{/showFormForUpdate/{id} (id=${employee.id})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/deleteEmployee/{id} (id=${employee.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	<!--  	<div th:if="${totalPages > 1}"></div>
+		<div class="row col-sm-10">
+			<div class="col-sm-2">
+			Total Rows:[[${totalRecords}]]]
+			</div>
+			<div class="col-sm-1 page-item">
+				<div class="col-sm-1 page-item">
+					<a th:if="${currentPage==1}">Previous</a> <a
+						th:if="${currentPage!=1}" th:href="@{'/page/'+${currentPage - 1}}">Previous</a>
+
+				</div>
+
+
+			</div>
+
+			<div class="col-sm-1">
+				<span class="page-item"
+					th:each="i: ${#numbers.sequence(1,totalPages)}"> <a
+					th:if="${currentPage!=i}" th:href="@{'/page/'+${i}}">[[${i}]]</a> <span
+					th:unless="${currentPage!=i}">[[${i}]]</span>
+				</span>
+
+			</div>
+			<div class="col-sm-1 page-item">
+				<a th:if="${currentPage < totalPages}"
+					th:href="@{'/page/'+${currentPage + 1}}">Next</a> <span
+					class="page-item" th:unless="${currentPage < totalPages}">Next</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}"
+					th:href="@{'/page/'+${totalPages}}">Last</a> <span
+					class="page-item" th:unless="${currentPage < totalPages}">Last</span>
+			</div>
+		</div> -->
+	</div>
+</body>
+</html>
